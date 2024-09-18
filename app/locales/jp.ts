@@ -464,9 +464,11 @@ const jp: PartialLocaleType = {
   Plugin: {
     Name: "プラグイン",
   },
+  /*
   Discovery: {
     Name: "発見",
   },
+  */
   FineTuned: {
     Sysmessage: "あなたはアシスタントです",
   },

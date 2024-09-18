@@ -118,7 +118,7 @@ export function NewChat() {
           text={Locale.NewChat.Return}
           onClick={() => navigate(Path.Home)}
         ></IconButton>
-        {!state?.fromHome && (
+        {/* {!state?.fromHome && (
           <IconButton
             text={Locale.NewChat.NotShow}
             onClick={async () => {
@@ -130,17 +130,17 @@ export function NewChat() {
               }
             }}
           ></IconButton>
-        )}
+        )} */}
       </div>
       <div className={styles["mask-cards"]}>
         <div className={styles["mask-card"]}>
-          <EmojiAvatar avatar="1f606" size={24} />
+          <EmojiAvatar avatar="1f469-200d-2695-fe0f" size={24} />
         </div>
         <div className={styles["mask-card"]}>
-          <EmojiAvatar avatar="1f916" size={24} />
+          <EmojiAvatar avatar="1f469-200d-1f4bc" size={24} />
         </div>
         <div className={styles["mask-card"]}>
-          <EmojiAvatar avatar="1f479" size={24} />
+          <EmojiAvatar avatar="1f9d1-200d-1f3eb" size={24} />
         </div>
       </div>
 
@@ -148,13 +148,13 @@ export function NewChat() {
       <div className={styles["sub-title"]}>{Locale.NewChat.SubTitle}</div>
 
       <div className={styles["actions"]}>
-        <IconButton
+        {/* <IconButton
           text={Locale.NewChat.More}
           onClick={() => navigate(Path.Masks)}
           icon={<EyeIcon />}
           bordered
           shadow
-        />
+        /> */}
 
         <IconButton
           text={Locale.NewChat.Skip}
@@ -168,15 +168,16 @@ export function NewChat() {
 
       <div className={styles["masks"]} ref={maskRef}>
         {groups.map((masks, i) => (
-          <div key={i} className={styles["mask-row"]}>
-            {masks.map((mask, index) => (
-              <MaskItem
-                key={index}
-                mask={mask}
-                onClick={() => startChat(mask)}
-              />
-            ))}
-          </div>
+           masks.map((mask, index) => (
+            <MaskItem
+              key={index}
+              mask={mask}
+              onClick={() => startChat(mask)}
+            />
+          ))
+          // <div key={i} className={styles["mask-row"]}>
+           
+          // </div>
         ))}
       </div>
     </div>

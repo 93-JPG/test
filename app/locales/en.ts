@@ -529,9 +529,11 @@ const en: LocaleType = {
     Clear: "Context Cleared",
     Revert: "Revert",
   },
+  
   Discovery: {
     Name: "Discovery",
   },
+  
   FineTuned: {
     Sysmessage: "You are an assistant that",
   },

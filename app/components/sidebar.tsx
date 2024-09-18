@@ -5,14 +5,14 @@ import styles from "./home.module.scss";
 import { IconButton } from "./button";
 import SettingsIcon from "../icons/settings.svg";
 import GithubIcon from "../icons/github.svg";
-import ChatGptIcon from "../icons/chatgpt.svg";
+import ChatGptIcon from "../icons/logo-ai.svg";
 import AddIcon from "../icons/add.svg";
 import CloseIcon from "../icons/close.svg";
 import DeleteIcon from "../icons/delete.svg";
 import MaskIcon from "../icons/mask.svg";
 import DragIcon from "../icons/drag.svg";
 import DiscoveryIcon from "../icons/discovery.svg";
-
+import { CSSProperties } from "react";
 import Locale from "../locales";
 
 import { useAppConfig, useChatStore } from "../store";
@@ -129,7 +129,7 @@ export function useDragSideBar() {
   };
 }
 export function SideBarContainer(props: {
-  children: React.ReactNode;
+  children: React.ReactNode; 
   onDragStart: (e: MouseEvent) => void;
   shouldNarrow: boolean;
   className?: string;
@@ -142,12 +142,11 @@ export function SideBarContainer(props: {
   const { children, className, onDragStart, shouldNarrow } = props;
   return (
     <div
-      className={`${styles.sidebar} ${className} ${
-        shouldNarrow && styles["narrow-sidebar"]
-      }`}
+      className={`${styles.sidebar} ${className} ${shouldNarrow && styles["narrow-sidebar"]
+        }`}
       style={{
         // #3016 disable transition on ios mobile screen
-        transition: isMobileScreen && isIOSMobile ? "none" : undefined,
+        transition: isMobileScreen && isIOSMobile ? "none" : undefined
       }}
     >
       {children}
@@ -205,7 +204,7 @@ export function SideBarTail(props: {
   return (
     <div className={styles["sidebar-tail"]}>
       <div className={styles["sidebar-actions"]}>{primaryAction}</div>
-      <div className={styles["sidebar-actions"]}>{secondaryAction}</div>
+      <div className={styles["sidebar-actions"]} style={{flex: 1}}>{secondaryAction}</div>
     </div>
   );
 }
@@ -225,8 +224,8 @@ export function SideBar(props: { className?: string }) {
       {...props}
     >
       <SideBarHeader
-        title="NextChat"
-        subTitle="Build your own AI assistant."
+        title="Search AI"
+        subTitle="create your Smart Assistant."
         logo={<ChatGptIcon />}
       >
         <div className={styles["sidebar-header-bar"]}>
@@ -243,13 +242,7 @@ export function SideBar(props: { className?: string }) {
             }}
             shadow
           />
-          <IconButton
-            icon={<DiscoveryIcon />}
-            text={shouldNarrow ? undefined : Locale.Discovery.Name}
-            className={styles["sidebar-bar-button"]}
-            onClick={() => setShowPluginSelector(true)}
-            shadow
-          />
+
         </div>
         {showPluginSelector && (
           <Selector
@@ -295,40 +288,26 @@ export function SideBar(props: { className?: string }) {
                 }}
               />
             </div>
-            <div className={styles["sidebar-action"]}>
-              <Link to={Path.Settings}>
-                <IconButton
-                  aria={Locale.Settings.Title}
-                  icon={<SettingsIcon />}
-                  shadow
-                />
-              </Link>
-            </div>
-            <div className={styles["sidebar-action"]}>
-              <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
-                <IconButton
-                  aria={Locale.Export.MessageFromChatGPT}
-                  icon={<GithubIcon />}
-                  shadow
-                />
-              </a>
-            </div>
+
+
           </>
         }
         secondaryAction={
-          <IconButton
-            icon={<AddIcon />}
-            text={shouldNarrow ? undefined : Locale.Home.NewChat}
-            onClick={() => {
-              if (config.dontShowMaskSplashScreen) {
-                chatStore.newSession();
-                navigate(Path.Chat);
-              } else {
-                navigate(Path.NewChat);
-              }
-            }}
-            shadow
-          />
+            <IconButton
+              icon={<AddIcon />}
+              text={shouldNarrow ? undefined : Locale.Home.NewChat}
+              style={{flex: 1}}
+              onClick={() => {
+                if (config.dontShowMaskSplashScreen) {
+                  chatStore.newSession();
+                  navigate(Path.Chat);
+                } else {
+                  navigate(Path.NewChat);
+                }
+              }}
+              shadow
+            />
+
         }
       />
     </SideBarContainer>

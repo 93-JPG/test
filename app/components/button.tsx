@@ -45,7 +45,7 @@ export function IconButton(props: {
             ` ${props.type === "primary" && "no-dark"}`
           }
         >
-          {props.icon}
+          {props.icon}  
         </div>
       )}
 

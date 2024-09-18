@@ -88,6 +88,7 @@ export const useMaskStore = createPersistStore(
       const userMasks = Object.values(get().masks).sort(
         (a, b) => b.createdAt - a.createdAt,
       );
+     
       const config = useAppConfig.getState();
       if (config.hideBuiltinMasks) return userMasks;
       const buildinMasks = BUILTIN_MASKS.map(
@@ -100,7 +101,9 @@ export const useMaskStore = createPersistStore(
             },
           }) as Mask,
       );
-      return userMasks.concat(buildinMasks);
+      const userMaskList =  userMasks.concat(buildinMasks);
+      // console.log('userMasks',userMaskList)
+      return  userMaskList
     },
     search(text: string) {
       return Object.values(get().masks);

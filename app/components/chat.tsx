@@ -27,9 +27,9 @@ import SettingsIcon from "../icons/chat-settings.svg";
 import DeleteIcon from "../icons/clear.svg";
 import PinIcon from "../icons/pin.svg";
 import EditIcon from "../icons/rename.svg";
-import ConfirmIcon from "../icons/confirm.svg";
-import CloseIcon from "../icons/close.svg";
-import CancelIcon from "../icons/cancel.svg";
+import ConfirmIcon from "../icons/confirm.svg"; //111
+import CloseIcon from "../icons/close.svg";//1111
+import CancelIcon from "../icons/cancel.svg";//111
 import ImageIcon from "../icons/image.svg";
 
 import LightIcon from "../icons/light.svg";
@@ -38,7 +38,7 @@ import AutoIcon from "../icons/auto.svg";
 import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
 import RobotIcon from "../icons/robot.svg";
-import SizeIcon from "../icons/size.svg";
+import SizeIcon from "../icons/size.svg";//111
 import QualityIcon from "../icons/hd.svg";
 import StyleIcon from "../icons/palette.svg";
 import PluginIcon from "../icons/plugin.svg";
@@ -83,6 +83,11 @@ import Locale from "../locales";
 import { IconButton } from "./button";
 import styles from "./chat.module.scss";
 
+import PrivacyModal from '../components/PrivacyModal';
+
+
+
+
 import {
   List,
   ListItem,
@@ -110,6 +115,7 @@ import { ExportMessageModal } from "./exporter";
 import { getClientConfig } from "../config/client";
 import { useAllModels } from "../utils/hooks";
 import { MultimodalContent } from "../client/api";
+
 
 const localStorage = safeLocalStorage();
 
@@ -142,18 +148,18 @@ export function SessionConfigModel(props: { onClose: () => void }) {
               }
             }}
           />,
-          <IconButton
-            key="copy"
-            icon={<CopyIcon />}
-            bordered
-            text={Locale.Chat.Config.SaveAs}
-            onClick={() => {
-              navigate(Path.Masks);
-              setTimeout(() => {
-                maskStore.create(session.mask);
-              }, 500);
-            }}
-          />,
+          // <IconButton
+          //   key="copy"
+          //   icon={<CopyIcon />}
+          //   bordered
+          //   text={Locale.Chat.Config.SaveAs}
+          //   onClick={() => {
+          //     navigate(Path.Masks);
+          //     setTimeout(() => {
+          //       maskStore.create(session.mask);
+          //     }, 500);
+          //   }}
+          // />,
         ]}
       >
         <MaskConfig
@@ -538,13 +544,13 @@ export function ChatActions(props: {
 
   return (
     <div className={styles["chat-input-actions"]}>
-      {couldStop && (
+      {/* {couldStop && (
         <ChatAction
           onClick={stopAll}
           text={Locale.Chat.InputActions.Stop}
           icon={<StopIcon />}
         />
-      )}
+      )} */}
       {!props.hitBottom && (
         <ChatAction
           onClick={props.scrollToBottom}
@@ -552,21 +558,21 @@ export function ChatActions(props: {
           icon={<BottomIcon />}
         />
       )}
-      {props.hitBottom && (
+      {/* {props.hitBottom && (
         <ChatAction
           onClick={props.showPromptModal}
           text={Locale.Chat.InputActions.Settings}
           icon={<SettingsIcon />}
         />
-      )}
+      )} */}
 
-      {showUploadImage && (
+      {/* {showUploadImage && (
         <ChatAction
           onClick={props.uploadImage}
           text={Locale.Chat.InputActions.UploadImage}
           icon={props.uploading ? <LoadingButtonIcon /> : <ImageIcon />}
         />
-      )}
+      )} */}
       <ChatAction
         onClick={nextTheme}
         text={Locale.Chat.InputActions.Theme[theme]}
@@ -583,21 +589,21 @@ export function ChatActions(props: {
         }
       />
 
-      <ChatAction
+      {/* <ChatAction
         onClick={props.showPromptHints}
         text={Locale.Chat.InputActions.Prompt}
         icon={<PromptIcon />}
-      />
+      /> */}
 
-      <ChatAction
+      {/* <ChatAction
         onClick={() => {
           navigate(Path.Masks);
         }}
         text={Locale.Chat.InputActions.Masks}
         icon={<MaskIcon />}
-      />
+      /> */}
 
-      <ChatAction
+      {/* <ChatAction
         text={Locale.Chat.InputActions.Clear}
         icon={<BreakIcon />}
         onClick={() => {
@@ -610,7 +616,7 @@ export function ChatActions(props: {
             }
           });
         }}
-      />
+      /> */}
 
       <ChatAction
         onClick={() => setShowModelSelector(true)}
@@ -622,11 +628,10 @@ export function ChatActions(props: {
         <Selector
           defaultSelectedValue={`${currentModel}@${currentProviderName}`}
           items={models.map((m) => ({
-            title: `${m.displayName}${
-              m?.provider?.providerName
+            title: `${m.displayName}${m?.provider?.providerName
                 ? " (" + m?.provider?.providerName + ")"
                 : ""
-            }`,
+              }`,
             value: `${m.name}@${m?.provider?.providerName}`,
           }))}
           onClose={() => setShowModelSelector(false)}
@@ -733,7 +738,7 @@ export function ChatActions(props: {
         />
       )}
 
-      {showPlugins(currentProviderName, currentModel) && (
+      {/* {showPlugins(currentProviderName, currentModel) && (
         <ChatAction
           onClick={() => {
             if (pluginStore.getAll().length == 0) {
@@ -745,7 +750,7 @@ export function ChatActions(props: {
           text={Locale.Plugin.Name}
           icon={<PluginIcon />}
         />
-      )}
+      )} */}
       {showPluginSelector && (
         <Selector
           multiple
@@ -763,13 +768,13 @@ export function ChatActions(props: {
         />
       )}
 
-      {!isMobileScreen && (
+      {/* {!isMobileScreen && (
         <ChatAction
           onClick={() => props.setShowShortcutKeyModal(true)}
           text={Locale.Chat.ShortcutKey.Title}
           icon={<ShortcutkeyIcon />}
         />
-      )}
+      )} */}
     </div>
   );
 }
@@ -836,13 +841,13 @@ export function EditMessageModal(props: { onClose: () => void }) {
   );
 }
 
-export function DeleteImageButton(props: { deleteImage: () => void }) {
-  return (
-    <div className={styles["delete-image"]} onClick={props.deleteImage}>
-      <DeleteIcon />
-    </div>
-  );
-}
+// export function DeleteImageButton(props: { deleteImage: () => void }) {
+//   return (
+//     <div className={styles["delete-image"]} onClick={props.deleteImage}>
+//       <DeleteIcon />
+//     </div>
+//   );
+// }
 
 export function ShortcutKeyModal(props: { onClose: () => void }) {
   const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0;
@@ -923,9 +928,9 @@ function _Chat() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const isScrolledToBottom = scrollRef?.current
     ? Math.abs(
-        scrollRef.current.scrollHeight -
-          (scrollRef.current.scrollTop + scrollRef.current.clientHeight),
-      ) <= 1
+      scrollRef.current.scrollHeight -
+      (scrollRef.current.scrollTop + scrollRef.current.clientHeight),
+    ) <= 1
     : false;
   const { setAutoScroll, scrollDomToBottom } = useScrollToBottom(
     scrollRef,
@@ -1206,27 +1211,27 @@ function _Chat() {
       .concat(
         isLoading
           ? [
-              {
-                ...createMessage({
-                  role: "assistant",
-                  content: "……",
-                }),
-                preview: true,
-              },
-            ]
+            {
+              ...createMessage({
+                role: "assistant",
+                content: "……",
+              }),
+              preview: true,
+            },
+          ]
           : [],
       )
       .concat(
         userInput.length > 0 && config.sendPreviewBubble
           ? [
-              {
-                ...createMessage({
-                  role: "user",
-                  content: userInput,
-                }),
-                preview: true,
-              },
-            ]
+            {
+              ...createMessage({
+                role: "user",
+                content: userInput,
+              }),
+              preview: true,
+            },
+          ]
           : [],
       );
   }, [
@@ -1321,7 +1326,7 @@ function _Chat() {
         if (payload.key || payload.url) {
           showConfirm(
             Locale.URLCommand.Settings +
-              `\n${JSON.stringify(payload, null, 4)}`,
+            `\n${JSON.stringify(payload, null, 4)}`,
           ).then((res) => {
             if (!res) return;
             if (payload.key) {
@@ -1541,7 +1546,7 @@ function _Chat() {
           </div>
         </div>
         <div className="window-actions">
-          {!isMobileScreen && (
+          {/* {!isMobileScreen && (
             <div className="window-action-button">
               <IconButton
                 icon={<RenameIcon />}
@@ -1551,8 +1556,8 @@ function _Chat() {
                 onClick={() => setIsEditingMessage(true)}
               />
             </div>
-          )}
-          <div className="window-action-button">
+          )} */}
+          {/* <div className="window-action-button">
             <IconButton
               icon={<ExportIcon />}
               bordered
@@ -1561,7 +1566,7 @@ function _Chat() {
                 setShowExport(true);
               }}
             />
-          </div>
+          </div> */}
           {showMaxIcon && (
             <div className="window-action-button">
               <IconButton
@@ -1618,7 +1623,7 @@ function _Chat() {
                   <div className={styles["chat-message-header"]}>
                     <div className={styles["chat-message-avatar"]}>
                       <div className={styles["chat-message-edit"]}>
-                        <IconButton
+                        {/* <IconButton
                           icon={<EditIcon />}
                           aria={Locale.Chat.Actions.Edit}
                           onClick={async () => {
@@ -1650,7 +1655,7 @@ function _Chat() {
                               }
                             });
                           }}
-                        ></IconButton>
+                        ></IconButton> */}
                       </div>
                       {isUser ? (
                         <Avatar avatar={config.avatar} />
@@ -1678,42 +1683,42 @@ function _Chat() {
                     {showActions && (
                       <div className={styles["chat-message-actions"]}>
                         <div className={styles["chat-input-actions"]}>
-                          {message.streaming ? (
+                          {/* {message.streaming ? (
                             <ChatAction
                               text={Locale.Chat.Actions.Stop}
                               icon={<StopIcon />}
                               onClick={() => onUserStop(message.id ?? i)}
                             />
-                          ) : (
-                            <>
-                              <ChatAction
-                                text={Locale.Chat.Actions.Retry}
-                                icon={<ResetIcon />}
-                                onClick={() => onResend(message)}
-                              />
+                          ) : ( */}
+                          <>
+                            <ChatAction
+                              text={Locale.Chat.Actions.Retry}
+                              icon={<ResetIcon />}
+                              onClick={() => onResend(message)}
+                            />
 
-                              <ChatAction
+                            {/* <ChatAction
                                 text={Locale.Chat.Actions.Delete}
                                 icon={<DeleteIcon />}
                                 onClick={() => onDelete(message.id ?? i)}
-                              />
+                              /> */}
 
-                              <ChatAction
+                            {/* <ChatAction
                                 text={Locale.Chat.Actions.Pin}
                                 icon={<PinIcon />}
                                 onClick={() => onPinMessage(message)}
-                              />
-                              <ChatAction
-                                text={Locale.Chat.Actions.Copy}
-                                icon={<CopyIcon />}
-                                onClick={() =>
-                                  copyToClipboard(
-                                    getMessageTextContent(message),
-                                  )
-                                }
-                              />
-                            </>
-                          )}
+                              /> */}
+                            <ChatAction
+                              text={Locale.Chat.Actions.Copy}
+                              icon={<CopyIcon />}
+                              onClick={() =>
+                                copyToClipboard(
+                                  getMessageTextContent(message),
+                                )
+                              }
+                            />
+                          </>
+                          {/* )} */}
                         </div>
                       </div>
                     )}
@@ -1832,11 +1837,10 @@ function _Chat() {
           setShowShortcutKeyModal={setShowShortcutKeyModal}
         />
         <label
-          className={`${styles["chat-input-panel-inner"]} ${
-            attachImages.length != 0
+          className={`${styles["chat-input-panel-inner"]} ${attachImages.length != 0
               ? styles["chat-input-panel-inner-attach"]
               : ""
-          }`}
+            }`}
           htmlFor="chat-input"
         >
           <textarea
@@ -1867,13 +1871,13 @@ function _Chat() {
                     style={{ backgroundImage: `url("${image}")` }}
                   >
                     <div className={styles["attach-image-mask"]}>
-                      <DeleteImageButton
+                      {/* <DeleteImageButton
                         deleteImage={() => {
                           setAttachImages(
                             attachImages.filter((_, i) => i !== index),
                           );
                         }}
-                      />
+                      /> */}
                     </div>
                   </div>
                 );
@@ -1909,8 +1913,14 @@ function _Chat() {
   );
 }
 
+
+
+
+
+
 export function Chat() {
   const chatStore = useChatStore();
   const sessionIndex = chatStore.currentSessionIndex;
   return <_Chat key={sessionIndex}></_Chat>;
 }
+
